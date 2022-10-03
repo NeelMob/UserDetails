@@ -1,0 +1,76 @@
+/* Page layout */
+
+#header {
+padding: 10px 60px;
+background: #111;
+margin-bottom: 10px;
+color:#99cc66;
+position: relative;
+
+}
+#header p {
+  margin: 5px 0;
+  }
+
+#header a {
+  color:gold;
+  }
+
+#pass{
+padding-top:10px;
+}
+
+#header #menu {
+ position: absolute;
+ right: 60px;
+ bottom: 0;
+ list-style: none;
+ }
+
+ #header #menu li a.selected {
+ 	background: #444;
+ }
+
+#content {
+	margin: 20px 60px;
+	background: #fff;
+	padding: 20px;
+	min-height: 400px;
+}
+
+#title {
+    margin-top: -4px;
+	margin-bottom: 30px;
+
+}
+
+#header #menu {
+	position: absolute;
+	margin-bottom: 0px;
+	right: 60px;
+	list-style: none;
+}
+
+#header #menu li {
+	float: left;
+}
+
+#header #menu li a {
+	display: block;
+	background: #222;
+	padding: 10px 20px;
+	margin-left: 3px;
+}
+
+#header #menu li a.selected {
+	background: #444;
+}
+
+
+#breadcrumb {
+	margin-bottom: 20px;
+	color: #888;
+}
+
+
+
