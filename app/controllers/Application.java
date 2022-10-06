@@ -5,7 +5,7 @@ import play.mvc.*;
 import play.data.validation.*;
 
 import models.*;
-import notifiers.*;
+
 
 public class Application extends Controller {
 
@@ -30,22 +30,17 @@ public class Application extends Controller {
             flash.error("Please correct these errors !");
             signup();
         }
+
         try {
             User user = new User(email, password, name);
-            try {
-                if (Notifier.welcome(user)) {
-                    flash.success("Your account is created. Please check your emails ...");
-                    login();
-                }
-            }
-            catch (Exception e) {
-                Logger.error(e, "Mail error");
-            }
+                flash.success("Your account is created. Please login");
+                login();
+
+        } catch (Exception e) {
+            flash.error("Duplicate email");
+            Logger.error(e, "Mail error");
         }
-        catch (Exception e){
-            flash.error("Email already exists");
-            login();
-        }
+        login();
     }
 
     public static void confirmRegistration(String uuid) {
@@ -69,11 +64,7 @@ public class Application extends Controller {
             flash.error("Bad email or bad password");
             flash.put("email", email);
             login();
-        } else if (user.needConfirmation != null) {
-            flash.error("This account is not confirmed");
-            flash.put("notconfirmed", user.needConfirmation);
-            flash.put("email", email);
-            login();
+
         }
         connect(user);
         flash.success("Welcome back %s !", user.name);
@@ -86,22 +77,6 @@ public class Application extends Controller {
         Users.index();
     }
 
-    public static void resendConfirmation(String uuid) {
-        User user = User.findByRegistrationUUID(uuid);
-        notFoundIfNull(user);
-        try {
-            if (Notifier.welcome(user)) {
-                flash.success("Please check your emails ...");
-                flash.put("email", user.email);
-                login();
-            }
-        } catch (Exception e) {
-            Logger.error(e, "Mail error");
-        }
-        flash.error("Oops (the email cannot be sent)...");
-        flash.put("email", user.email);
-        login();
-    }
 
     static void connect(User user) {
 

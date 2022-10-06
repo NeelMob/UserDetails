@@ -13,8 +13,7 @@ public class User extends Model {
 
     @Email
     @Required
-    @Column
-    @Unique
+    @Column(unique = true)
     public String email;
 
     @Required
@@ -42,10 +41,12 @@ public class User extends Model {
 
     }
     public static User findByRegistrationUUID(String uuid) {
+
         return find("needConfirmation", uuid).first();
     }
 
     public static List<User> findAll(int page, int pageSize) {
+
         return User.all().fetch(page, pageSize);
     }
 
